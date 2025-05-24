@@ -1,5 +1,6 @@
 let bubbles = JSON.parse(localStorage.getItem("bubblyTasks")) || [];
 
+let huboTareas = false; // <-- indica si alguna vez hubo tareas agregadas
 let timer = 0;
 let timerRunning = false;
 let timerInterval;
@@ -18,9 +19,30 @@ function saveBubbles() {
 
 function renderBubbles() {
   container.innerHTML = "";
-  if (bubbles.length === 0) {
+
+  if (bubbles.length === 0 && huboTareas) {
     document.getElementById("modal").style.display = "flex";
+  } else {
+    document.getElementById("modal").style.display = "none";
   }
+
+  bubbles.forEach((task, index) => {
+    const div = document.createElement("div");
+    div.className = "bubble";
+    div.textContent = task;
+    div.draggable = true;
+    div.onclick = () => {
+      if (confirm(`¿Eliminar "${task}"?`)) {
+        bubbles.splice(index, 1);
+        saveBubbles();
+        renderBubbles();
+        plopSound.play();
+      }
+    };
+    container.appendChild(div);
+  });
+}
+
 
   bubbles.forEach((task, index) => {
     const div = document.createElement("div");
@@ -42,8 +64,10 @@ function renderBubbles() {
 function addTask() {
   const input = document.getElementById("taskInput");
   const value = input.value.trim();
+
   if (value && bubbles.length < 20) {
     bubbles.push(value);
+    huboTareas = true; // 👈 Aca agregamos esto
     input.value = "";
     saveBubbles();
     renderBubbles();
