@@ -13,8 +13,31 @@ body {
   background-position: center;
 }
 
+/* Importar la fuente de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap');
+
+/* Estilos para el h1 */
 h1 {
+  font-family: 'Baloo 2', cursive;
   color: #6a5acd;
+  font-size: 3em; /* Tamaño grande */
+  text-shadow: 
+    3px 3px 0px rgba(255, 255, 255, 0.4), /* Sombra blanca para efecto "burbuja" */
+    -1px -1px 0px rgba(0, 0, 0, 0.1);     /* Sombra sutil para profundidad */
+  letter-spacing: 1px;
+  margin: 0;
+  display: inline-block;
+  padding: 10px 25px;
+  border-radius: 60px; /* Bordes muy redondeados */
+  background: rgba(255, 255, 255, 0.2); /* Fondo semitransparente */
+  backdrop-filter: blur(3px); /* Efecto vidrio (opcional) */
+  transition: all 0.3s ease; /* Transición suave al interactuar */
+}
+
+/* Efecto al pasar el mouse (opcional) */
+h1:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 input#taskInput {
