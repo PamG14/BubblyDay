@@ -13,7 +13,11 @@
 
   <!-- Botón centrado para añadir tarea -->
   <div id="addTaskFloating">
-    <button onclick="toggleTaskInput()">➕</button>
+    <button onclick="toggleTaskInput()" id="addButton">
+  <svg class="plus-icon" viewBox="0 0 24 24">
+    <path d="M12 5V19M5 12H19" />
+  </svg>
+</button>
   </div>
 
   <!-- Campo oculto para escribir tarea -->
