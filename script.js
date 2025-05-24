@@ -112,8 +112,16 @@ function closeModal() {
 
 function toggleTaskInput() {
   const area = document.getElementById("taskInputArea");
-  area.style.display = area.style.display === "none" ? "block" : "none";
+  const input = document.getElementById("taskInput");
+
+  if (area.style.display === "none") {
+    area.style.display = "block";
+    input.focus(); // ✅ Enfocar automáticamente el input
+  } else {
+    area.style.display = "none";
+  }
 }
+
 
 // Gestos para cambiar tiempo
 let lastY = null;
