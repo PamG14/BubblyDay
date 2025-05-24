@@ -85,14 +85,11 @@ button:hover {
   margin-top: 10px;
 }
 
+/* ✅ MODAL centrado */
 .modal {
-  display: none;
   position: fixed;
   z-index: 999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-color: rgba(240, 248, 255, 0.85);
   display: flex;
   align-items: center;
@@ -132,37 +129,26 @@ button:hover {
   justify-content: center;
 }
 
-.pomodoro-picker {
-  font-size: 2em;
+/* ✅ Pomodoro Reloj */
+#pomodoroClock {
+  font-size: 3em;
+  color: #6a5acd;
   cursor: pointer;
-  color: #6a5acd;
-  margin-bottom: 10px;
+  user-select: none;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 20px;
+  background-color: #f3e8ff;
+  width: fit-content;
+  transition: transform 0.2s ease;
+  touch-action: none;
 }
 
-.wheel-container {
-  position: relative;
-  margin: 0 auto 20px;
-  height: 100px;
-  overflow: hidden;
-  width: 100px;
-  border-radius: 10px;
-  background-color: #eee6f9;
-  border: 1px solid #ccc;
+#pomodoroClock:active {
+  transform: scale(0.98);
 }
 
-.wheel {
-  height: 100%;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  -webkit-overflow-scrolling: touch;
+#timerDisplay {
+  font-weight: bold;
 }
 
-.wheel-item {
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  scroll-snap-align: center;
-  font-size: 1.2em;
-  color: #6a5acd;
-}
