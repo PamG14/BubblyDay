@@ -33,16 +33,9 @@
     </div>
   </div>
 
-  <!-- Pomodoro -->
-  <div class="pomodoro-picker" onclick="toggleWheel()">
-    <div id="timerWheelDisplay">20:00</div>
-  </div>
-
-  <div id="wheelContainer" class="wheel-container" style="display: none;">
-    <div id="minuteWheel" class="wheel" onscroll="handleWheelScroll()">
-      <!-- Números generados por JS -->
-    </div>
-    <button onclick="toggleTimer()">▶️</button>
+  <!-- Pomodoro simplificado -->
+  <div id="pomodoroClock" class="pomodoro-clock">
+    <div id="timerDisplay">20:00</div>
   </div>
 
   <audio id="plopSound" src="plop.mp3"></audio>
@@ -52,3 +45,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
