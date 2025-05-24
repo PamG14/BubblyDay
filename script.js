@@ -3,10 +3,14 @@ let bubbles = JSON.parse(localStorage.getItem("bubblyTasks")) || [];
 let timer = 0;
 let timerRunning = false;
 let timerInterval;
-let pomodoroMinutes = 25;
+let pomodoroMinutes = 20; // Valor inicial por defecto
 
 const container = document.getElementById("bubbleContainer");
 const plopSound = document.getElementById("plopSound");
+
+// Reloj
+const pomodoroClock = document.getElementById("pomodoroClock");
+const timerDisplay = document.getElementById("timerDisplay");
 
 function saveBubbles() {
   localStorage.setItem("bubblyTasks", JSON.stringify(bubbles));
@@ -47,13 +51,19 @@ function addTask() {
   }
 }
 
+function updateTimerDisplay() {
+  const minutes = Math.floor(timer / 60);
+  const seconds = timer % 60;
+  timerDisplay.textContent =
+    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
 function toggleTimer() {
   if (timerRunning) {
     clearInterval(timerInterval);
+    timerRunning = false;
   } else {
-    if (timer === 0) {
-      timer = pomodoroMinutes * 60;
-    }
+    if (timer === 0) timer = pomodoroMinutes * 60;
     timerInterval = setInterval(() => {
       if (timer > 0) {
         timer--;
@@ -61,26 +71,17 @@ function toggleTimer() {
       } else {
         clearInterval(timerInterval);
         alert("¡Pomodoro terminado!");
+        timerRunning = false;
         timer = pomodoroMinutes * 60;
         updateTimerDisplay();
       }
     }, 1000);
+    timerRunning = true;
   }
-  timerRunning = !timerRunning;
 }
 
-function updateTimerDisplay() {
-  const minutes = Math.floor(timer / 60);
-  const seconds = timer % 60;
-  document.getElementById("timerWheelDisplay").textContent =
-    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-}
-
-function resetTimer() {
-  clearInterval(timerInterval);
-  timerRunning = false;
-  timer = pomodoroMinutes * 60;
-  updateTimerDisplay();
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
 }
 
 function toggleTaskInput() {
@@ -88,56 +89,52 @@ function toggleTaskInput() {
   area.style.display = area.style.display === "none" ? "block" : "none";
 }
 
-function toggleWheel() {
-  const wheel = document.getElementById("wheelContainer");
-  wheel.style.display = wheel.style.display === "none" ? "block" : "none";
-}
+// Gestos para cambiar tiempo
+let lastY = null;
+pomodoroClock.addEventListener("touchstart", (e) => {
+  lastY = e.touches[0].clientY;
+});
 
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
+pomodoroClock.addEventListener("touchmove", (e) => {
+  if (lastY === null) return;
+  const currentY = e.touches[0].clientY;
+  const diffY = lastY - currentY;
 
-function generateWheel() {
-  const wheel = document.getElementById("minuteWheel");
-  for (let i = 5; i <= 90; i += 5) {
-    const div = document.createElement("div");
-    div.textContent = i + " min";
-    div.dataset.minutes = i;
-    div.className = "wheel-item";
-    wheel.appendChild(div);
+  if (Math.abs(diffY) > 20) {
+    adjustTime(diffY > 0 ? 1 : -1);
+    lastY = currentY;
   }
+});
 
-  // Posicionar en el valor actual
-  const pos = (pomodoroMinutes / 5 - 1) * 40;
-  wheel.scrollTop = pos;
+pomodoroClock.addEventListener("touchend", () => {
+  lastY = null;
+});
 
-  // Listener optimizado con debounce
-  let scrollTimeout;
-  wheel.addEventListener('scroll', () => {
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(handleWheelScroll, 100);
-  });
+// Mouse scroll
+pomodoroClock.addEventListener("wheel", (e) => {
+  e.preventDefault();
+  adjustTime(e.deltaY < 0 ? 1 : -1);
+});
+
+// Click para iniciar/parar
+pomodoroClock.addEventListener("click", () => {
+  toggleTimer();
+});
+
+function adjustTime(delta) {
+  if (timerRunning) return; // No permitir cambios durante la cuenta regresiva
+
+  pomodoroMinutes = Math.min(60, Math.max(5, pomodoroMinutes + delta));
+  timer = pomodoroMinutes * 60;
+  updateTimerDisplay();
 }
 
-function handleWheelScroll() {
-  const wheel = document.getElementById("minuteWheel");
-  const items = wheel.querySelectorAll(".wheel-item");
-  const scrollPosition = wheel.scrollTop;
-  const index = Math.round(scrollPosition / 40);
-  const selected = items[index];
-  if (selected) {
-    pomodoroMinutes = parseInt(selected.dataset.minutes);
-    timer = pomodoroMinutes * 60;
-    updateTimerDisplay();
-  }
-}
-
-// Inicializar al cargar
+// Inicializar
 renderBubbles();
-generateWheel();
+timer = pomodoroMinutes * 60;
 updateTimerDisplay();
 
-// Drag & drop ordenable
+// Drag & drop tareas
 new Sortable(container, {
   animation: 150,
   onEnd: function (evt) {
@@ -147,3 +144,4 @@ new Sortable(container, {
     renderBubbles();
   }
 });
+
