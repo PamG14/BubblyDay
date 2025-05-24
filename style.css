@@ -50,11 +50,38 @@ input#taskInput {
 button {
   padding: 10px 15px;
   margin-left: 10px;
-  background-color: #d8bfd8;
-  border: none;
+  background-color: #d8bfd8; /* Lila claro */
+  border: 2px solid #c9a8c9; /* Borde más oscuro que el fondo */
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.2s, transform 0.2s;
+  transition: all 0.2s ease;
+  
+  /* Sombras para efecto 3D */
+  box-shadow: 
+    0 3px 6px rgba(106, 90, 205, 0.1), /* Sombra externa */
+    inset 0 1px 2px rgba(255, 255, 255, 0.5), /* Brillo interno */
+    inset 0 -1px 2px rgba(106, 90, 205, 0.1); /* Sombra interna */
+  
+  color: #5a4a8a; /* Texto más oscuro para contraste */
+  font-weight: 500;
+}
+
+/* Efecto al pasar el mouse */
+button:hover {
+  background-color: #d0b3d0;
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 8px rgba(106, 90, 205, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+/* Efecto al hacer clic */
+button:active {
+  background-color: #c9a8c9;
+  transform: translateY(1px);
+  box-shadow: 
+    0 1px 3px rgba(106, 90, 205, 0.1),
+    inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
@@ -71,18 +98,39 @@ button:hover {
 }
 
 .bubble {
-  background-color: #add8e6;
+  background-color: #add8e6; /* Azul claro */
   padding: 15px 20px;
   border-radius: 50px;
   cursor: grab;
   user-select: none;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: background-color 0.2s, transform 0.2s;
+  
+  /* Bordes y sombras para efecto 3D */
+  border: 2px solid #9bc4d2; /* Borde más oscuro que el fondo */
+  box-shadow: 
+    0 3px 6px rgba(0, 0, 0, 0.1), /* Sombra externa */
+    inset 0 2px 4px rgba(255, 255, 255, 0.7), /* Brillo interno */
+    inset 0 -1px 2px rgba(0, 0, 0, 0.1); /* Sombra interna */
+  
+  transition: all 0.2s ease;
 }
 
+/* Efecto al pasar el mouse */
 .bubble:hover {
-  background-color: #87cefa;
-  transform: scale(1.03);
+  background-color: #a5d0e0;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 5px 10px rgba(0, 0, 0, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+/* Efecto al arrastrar (grab) */
+.bubble:active {
+  cursor: grabbing;
+  background-color: #9bc4d2;
+  transform: translateY(1px);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 #addTaskFloating {
