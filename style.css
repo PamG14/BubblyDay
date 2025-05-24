@@ -141,30 +141,36 @@ button:hover {
   text-align: center;
 }
 
+/* Nuevos estilos para el botón + SVG */
 #addTaskFloating button {
   width: 50px;
   height: 50px;
-  font-size: 28px;
-  line-height: 50px;
-  text-align: center;
-  vertical-align: middle;
   border-radius: 50%;
-  background-color: #bde0fe; /* Azul claro pastel */
+  background-color: #bde0fe;
+  border: 2px solid #a8cceb;
   cursor: pointer;
-  padding: 0;
-  transition: all 0.3s ease;
-  
-  /* Estilo 3D consistente */
-  border: 2px solid #a8cceb; /* Borde más oscuro */
   box-shadow: 
-    0 4px 8px rgba(0, 0, 0, 0.1), /* Sombra externa */
-    inset 0 2px 4px rgba(255, 255, 255, 0.7), /* Brillo interno */
-    inset 0 -2px 4px rgba(0, 0, 0, 0.1); /* Sombra interna */
-  
-  color: #5a7fa3; /* Color de texto para contraste */
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 2px 4px rgba(255, 255, 255, 0.7),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex;          /* Nuevo: Para centrar el SVG */
+  align-items: center;    /* Nuevo */
+  justify-content: center; /* Nuevo */
+  padding: 0;
 }
 
-/* Efecto hover - más pronunciado */
+/* Estilos del ícono SVG (añadir esto) */
+#addTaskFloating button svg {
+  width: 24px;
+  height: 24px;
+  stroke: #5a7fa3;       /* Color del ícono */
+  stroke-width: 3;
+  stroke-linecap: round;  /* Extremos redondeados */
+  transition: transform 0.3s ease, stroke 0.3s ease;
+}
+
+/* Efecto hover (actualizado para el SVG) */
 #addTaskFloating button:hover {
   background-color: #a5d4fc;
   transform: translateY(-3px) scale(1.1);
@@ -173,7 +179,12 @@ button:hover {
     inset 0 3px 6px rgba(255, 255, 255, 0.8);
 }
 
-/* Efecto al hacer clic */
+#addTaskFloating button:hover svg {
+  stroke: #4a6b8a;       /* Oscurece el ícono al hacer hover */
+  transform: scale(1.1);
+}
+
+/* Efecto active (clic) */
 #addTaskFloating button:active {
   background-color: #9bc4e6;
   transform: translateY(1px) scale(0.98);
@@ -182,6 +193,11 @@ button:hover {
     inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
+#addTaskFloating button:active svg {
+  transform: scale(0.9);
+}
+
+/* Input area (se mantiene igual) */
 #taskInputArea {
   margin-top: 10px;
 }
