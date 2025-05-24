@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>BubblyDay</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1>BubblyDay</h1>
+
+  <div id="bubbleContainer"></div>
+
+  <!-- Botón centrado para añadir tarea -->
+  <div id="addTaskFloating">
+    <button onclick="toggleTaskInput()">➕</button>
+  </div>
+
+  <!-- Campo oculto para escribir tarea -->
+  <div id="taskInputArea" style="display: none;">
+    <input type="text" id="taskInput" placeholder="Escribí tu tarea">
+    <button onclick="addTask()">Agregar</button>
+  </div>
+
+  <!-- Modal de finalización -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeModal()">✖</button>
+      <h2>¡Buen trabajo! 🎉</h2>
+      <p>Terminaste todas tus tareas.</p>
+      <p>Si la app te fue útil, considerá hacer una donación al refugio <strong>Conejitos BA 🐇💖</strong>.</p>
+      <p>Alias: conejitosba</p>
+    </div>
+  </div>
+
+  <!-- Pomodoro -->
+  <div class="pomodoro-picker" onclick="toggleWheel()">
+    <div id="timerWheelDisplay">20:00</div>
+  </div>
+
+  <div id="wheelContainer" class="wheel-container" style="display: none;">
+    <div id="minuteWheel" class="wheel" onscroll="handleWheelScroll()">
+      <!-- Números generados por JS -->
+    </div>
+    <button onclick="toggleTimer()">▶️</button>
+  </div>
+
+  <audio id="plopSound" src="plop.mp3"></audio>
+
+  <!-- SortableJS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
