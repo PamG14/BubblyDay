@@ -45,6 +45,13 @@ function renderBubbles() {
   });
 }
 
+document.getElementById("taskInput").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    addTask();
+  }
+});
+
+
 function addTask() {
   const input = document.getElementById("taskInput");
   const value = input.value.trim();
