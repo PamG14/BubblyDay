@@ -129,19 +129,19 @@ button:hover {
   justify-content: center;
 }
 
-/* ✅ Pomodoro Reloj */
+/* ✅ Pomodoro Reloj (ajustado) */
 #pomodoroClock {
-  font-size: 3em;
+  font-size: 2em;             /* antes 3em */
   color: #6a5acd;
   cursor: pointer;
   user-select: none;
-  margin: 40px auto;
-  padding: 30px;
+  margin: 20px auto;          /* antes 40px */
+  padding: 12px 24px;         /* antes 30px */
   border-radius: 20px;
   background-color: #f3e8ff;
   width: fit-content;
   transition: transform 0.2s ease;
-  touch-action: none;
+  /* Eliminamos touch-action para permitir scroll */
 }
 
 #pomodoroClock:active {
@@ -150,5 +150,6 @@ button:hover {
 
 #timerDisplay {
   font-weight: bold;
+  font-size: 1.6em;           /* ajustamos esto también */
 }
 
