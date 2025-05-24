@@ -115,6 +115,37 @@ pomodoroClock.addEventListener("wheel", (e) => {
   e.preventDefault();
   adjustTime(e.deltaY < 0 ? 1 : -1);
 });
+let mouseIsDown = false;
+let lastMouseY = null;
+
+// Eventos para mouse
+pomodoroClock.addEventListener('mousedown', (e) => {
+  mouseIsDown = true;
+  lastMouseY = e.clientY;
+  e.preventDefault(); // Previene selección de texto
+});
+
+pomodoroClock.addEventListener('mousemove', (e) => {
+  if (!mouseIsDown || lastMouseY === null) return;
+  const currentY = e.clientY;
+  const diffY = lastMouseY - currentY;
+
+  if (Math.abs(diffY) > 5) {
+    adjustTime(diffY > 0 ? 1 : -1);
+    lastMouseY = currentY;
+  }
+});
+
+pomodoroClock.addEventListener('mouseup', () => {
+  mouseIsDown = false;
+  lastMouseY = null;
+});
+
+pomodoroClock.addEventListener('mouseleave', () => {
+  mouseIsDown = false;
+  lastMouseY = null;
+});
+
 
 // Click para iniciar/parar
 pomodoroClock.addEventListener("click", () => {
