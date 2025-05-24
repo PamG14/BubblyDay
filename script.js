@@ -1,31 +1,31 @@
 let bubbles = JSON.parse(localStorage.getItem("bubblyTasks")) || [];
-
-let huboTareas = false; // <-- indica si alguna vez hubo tareas agregadas
+let huboTareas = JSON.parse(localStorage.getItem("huboTareas")) || false; // Estado persistente
 let timer = 0;
 let timerRunning = false;
 let timerInterval;
-let pomodoroMinutes = 20; // Valor inicial por defecto
+let pomodoroMinutes = 20;
 
 const container = document.getElementById("bubbleContainer");
 const plopSound = document.getElementById("plopSound");
+const modal = document.getElementById("modal");
 
-// Reloj
-const pomodoroClock = document.getElementById("pomodoroClock");
-const timerDisplay = document.getElementById("timerDisplay");
+// Inicialización - Ocultar modal al cargar
+modal.style.display = "none";
 
 function saveBubbles() {
   localStorage.setItem("bubblyTasks", JSON.stringify(bubbles));
+  localStorage.setItem("huboTareas", JSON.stringify(huboTareas));
 }
 
 function renderBubbles() {
   container.innerHTML = "";
 
+  // Mostrar modal solo si hubo tareas y ahora no hay ninguna
   if (bubbles.length === 0 && huboTareas) {
-    document.getElementById("modal").style.display = "flex";
+    modal.style.display = "flex";
   } else {
-    document.getElementById("modal").style.display = "none";
+    modal.style.display = "none";
   }
-
 
   bubbles.forEach((task, index) => {
     const div = document.createElement("div");
@@ -35,6 +35,7 @@ function renderBubbles() {
     div.onclick = () => {
       if (confirm(`¿Eliminar "${task}"?`)) {
         bubbles.splice(index, 1);
+        huboTareas = bubbles.length > 0 || huboTareas; // Mantener estado si ya hubo tareas
         saveBubbles();
         renderBubbles();
         plopSound.play();
@@ -50,7 +51,7 @@ function addTask() {
 
   if (value && bubbles.length < 20) {
     bubbles.push(value);
-    huboTareas = true; // 👈 Aca agregamos esto
+    huboTareas = true; // Marcar que hubo al menos una tarea
     input.value = "";
     saveBubbles();
     renderBubbles();
@@ -58,6 +59,14 @@ function addTask() {
   }
 }
 
+function closeModal() {
+  modal.style.display = "none";
+  // Opcional: si quieres que no vuelva a aparecer hasta que complete nuevas tareas
+  // huboTareas = false;
+  // saveBubbles();
+}
+
+// ... (resto del código permanece igual)
 function updateTimerDisplay() {
   const minutes = Math.floor(timer / 60);
   const seconds = timer % 60;
