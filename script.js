@@ -26,23 +26,6 @@ function renderBubbles() {
     document.getElementById("modal").style.display = "none";
   }
 
-  bubbles.forEach((task, index) => {
-    const div = document.createElement("div");
-    div.className = "bubble";
-    div.textContent = task;
-    div.draggable = true;
-    div.onclick = () => {
-      if (confirm(`¿Eliminar "${task}"?`)) {
-        bubbles.splice(index, 1);
-        saveBubbles();
-        renderBubbles();
-        plopSound.play();
-      }
-    };
-    container.appendChild(div);
-  });
-}
-
 
   bubbles.forEach((task, index) => {
     const div = document.createElement("div");
@@ -105,7 +88,10 @@ function toggleTimer() {
 }
 
 function closeModal() {
-  document.getElementById("modal").style.display = "none";
+  modal.style.display = "none";
+  // Si quieres que no vuelva a aparecer aunque no haya tareas
+  huboTareas = false;
+  saveBubbles();
 }
 
 function toggleTaskInput() {
@@ -185,6 +171,7 @@ function adjustTime(delta) {
 }
 
 // Inicializar
+modal.style.display = "none"; // Ocultar modal al inicio
 renderBubbles();
 timer = pomodoroMinutes * 60;
 updateTimerDisplay();
