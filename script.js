@@ -32,7 +32,8 @@ function renderBubbles() {
     div.className = "bubble";
     div.textContent = task;
     div.draggable = true;
-    div.onclick = () => {
+
+    const handleDelete = () => {
       if (confirm(`¿Eliminar "${task}"?`)) {
         bubbles.splice(index, 1);
         huboTareas = bubbles.length > 0 || huboTareas; // Mantener estado si ya hubo tareas
@@ -41,9 +42,14 @@ function renderBubbles() {
         plopSound.play();
       }
     };
+
+    div.addEventListener("click", handleDelete);      // Para mouse
+    div.addEventListener("touchend", handleDelete);   // Para celular
+
     container.appendChild(div);
   });
 }
+
 
 document.getElementById("taskInput").addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
