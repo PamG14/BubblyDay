@@ -137,8 +137,10 @@ button:hover {
 }
 
 #addTaskFloating {
-  margin: 20px auto;
-  text-align: center;
+  display: flex;           /* Cambia esto (elimina text-align) */
+  justify-content: center; /* Centrado horizontal */
+  margin: 20px auto;       /* Margen automático para centrar */
+  width: fit-content;      /* Ajusta el ancho al contenido */
 }
 
 /* Nuevos estilos para el botón + SVG */
