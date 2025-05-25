@@ -158,6 +158,19 @@ pomodoroClock.addEventListener("wheel", (e) => {
 let mouseIsDown = false;
 let lastMouseY = null;
 
+const wheel = document.querySelector('.wheel');
+
+// Evitar scroll general cuando tocamos la rueda (móvil)
+wheel.addEventListener('touchstart', (e) => {
+  e.stopPropagation();
+  document.body.style.overflow = 'hidden'; // Bloquear scroll de la página
+});
+
+wheel.addEventListener('touchend', () => {
+  document.body.style.overflow = ''; // Restaurar scroll cuando se termina el gesto
+});
+
+
 // Eventos para mouse
 pomodoroClock.addEventListener('mousedown', (e) => {
   mouseIsDown = true;
