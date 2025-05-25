@@ -74,43 +74,6 @@ function addTask() {
 
 function closeModal() {
   modal.style.display = "none";
-  // Opcional: si quieres que no vuelva a aparecer hasta que complete nuevas tareas
-  // huboTareas = false;
-  // saveBubbles();
-}
-
-// ... (resto del código permanece igual)
-function updateTimerDisplay() {
-  const minutes = Math.floor(timer / 60);
-  const seconds = timer % 60;
-  timerDisplay.textContent =
-    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-}
-
-function toggleTimer() {
-  if (timerRunning) {
-    clearInterval(timerInterval);
-    timerRunning = false;
-  } else {
-    if (timer === 0) timer = pomodoroMinutes * 60;
-    timerInterval = setInterval(() => {
-      if (timer > 0) {
-        timer--;
-        updateTimerDisplay();
-      } else {
-        clearInterval(timerInterval);
-        alert("¡Pomodoro terminado!");
-        timerRunning = false;
-        timer = pomodoroMinutes * 60;
-        updateTimerDisplay();
-      }
-    }, 1000);
-    timerRunning = true;
-  }
-}
-
-function closeModal() {
-  modal.style.display = "none";
   // Si quieres que no vuelva a aparecer aunque no haya tareas
   huboTareas = false;
   saveBubbles();
@@ -140,8 +103,9 @@ pomodoroClock.addEventListener("touchmove", (e) => {
   const currentY = e.touches[0].clientY;
   const diffY = lastY - currentY;
 
-  if (Math.abs(diffY) > 20) {
-    adjustTime(diffY > 0 ? 1 : -1);
+  let steps = Math.floor(diffY / 10);
+  if (steps !== 0) {
+    adjustTime(steps);
     lastY = currentY;
   }
 });
@@ -183,8 +147,9 @@ pomodoroClock.addEventListener('mousemove', (e) => {
   const currentY = e.clientY;
   const diffY = lastMouseY - currentY;
 
-  if (Math.abs(diffY) > 5) {
-    adjustTime(diffY > 0 ? 1 : -1);
+  let steps = Math.floor(diffY / 5);
+  if (steps !== 0) {
+    adjustTime(steps);
     lastMouseY = currentY;
   }
 });
@@ -213,6 +178,35 @@ function adjustTime(delta) {
   updateTimerDisplay();
 }
 
+function updateTimerDisplay() {
+  const minutes = Math.floor(timer / 60);
+  const seconds = timer % 60;
+  timerDisplay.textContent =
+    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function toggleTimer() {
+  if (timerRunning) {
+    clearInterval(timerInterval);
+    timerRunning = false;
+  } else {
+    if (timer === 0) timer = pomodoroMinutes * 60;
+    timerInterval = setInterval(() => {
+      if (timer > 0) {
+        timer--;
+        updateTimerDisplay();
+      } else {
+        clearInterval(timerInterval);
+        alert("¡Pomodoro terminado!");
+        timerRunning = false;
+        timer = pomodoroMinutes * 60;
+        updateTimerDisplay();
+      }
+    }, 1000);
+    timerRunning = true;
+  }
+}
+
 // Inicializar
 modal.style.display = "none"; // Ocultar modal al inicio
 renderBubbles();
@@ -229,4 +223,3 @@ new Sortable(container, {
     renderBubbles();
   }
 });
-
