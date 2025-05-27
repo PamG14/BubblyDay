@@ -1,3 +1,6 @@
+/* Importar la fuente de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap');
+
 body {
   font-family: sans-serif;
   background-color: #f0f8ff;
@@ -12,9 +15,6 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
-
-/* Importar la fuente de Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap');
 
 /* Estilos para el h1 */
 h1 {
