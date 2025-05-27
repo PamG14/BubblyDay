@@ -133,10 +133,11 @@ button:active {
 }
 
 #addTaskFloating {
-  display: flex;           /* Cambia esto (elimina text-align) */
-  justify-content: center; /* Centrado horizontal */
-  margin: 20px auto;       /* Margen automático para centrar */
-  width: fit-content;      /* Ajusta el ancho al contenido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  gap: 12px; /* separa los botones */
 }
 
 /* Nuevos estilos para el botón + SVG */
