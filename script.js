@@ -264,35 +264,29 @@ function closeHelperModal() {
   document.getElementById("helper-modal").classList.add("hidden");
 }
 
-// Seleccionar tarea aleatoria
-function selectRandomTask() {
-  closeHelperModal();
-
-  const tasks = document.querySelectorAll('.task');
+function highlightTaskRoulette() {
+  const tasks = Array.from(document.querySelectorAll('.task'));
   if (tasks.length === 0) return;
 
-  tasks.forEach(task => task.classList.remove('highlighted'));
+  tasks.forEach(t => t.classList.remove('highlighted'));
 
-  const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
-  randomTask.classList.add('highlighted');
+  let index = 0;
+  let totalCycles = 20 + Math.floor(Math.random() * 10); // cuántas vueltas da
+  let delay = 80;
+
+  function cycle() {
+    tasks.forEach(t => t.classList.remove('highlighted'));
+    tasks[index % tasks.length].classList.add('highlighted');
+
+    index++;
+    totalCycles--;
+
+    if (totalCycles > 0) {
+      setTimeout(cycle, delay);
+      delay += 20; // cada vez más lento
+    }
+  }
+
+  cycle();
 }
 
-document.getElementById("snowflake-help").addEventListener("click", () => {
-  document.getElementById("helper-modal").classList.remove("hidden");
-});
-
-function closeModal() {
-  document.getElementById("helper-modal").classList.add("hidden");
-}
-
-function selectRandomTask() {
-  closeModal();
-
-  const tasks = document.querySelectorAll('.task');
-  if (tasks.length === 0) return;
-
-  tasks.forEach(task => task.classList.remove('highlighted'));
-
-  const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
-  randomTask.classList.add('highlighted');
-}
