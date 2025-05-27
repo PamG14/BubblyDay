@@ -135,6 +135,10 @@ function closeHelperModal() {
   document.getElementById("helper-modal").classList.add("hidden");
 }
 
+function closeModal() {
+  document.getElementById("helper-modal").classList.add("hidden");
+}
+
 function highlightTaskRoulette() {
   closeHelperModal();
 
