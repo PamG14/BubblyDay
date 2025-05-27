@@ -1,26 +1,28 @@
+// ----- Estado inicial -----
 let bubbles = JSON.parse(localStorage.getItem("bubblyTasks")) || [];
-let huboTareas = JSON.parse(localStorage.getItem("huboTareas")) || false; // Estado persistente
+let huboTareas = JSON.parse(localStorage.getItem("huboTareas")) || false;
 let timer = 0;
 let timerRunning = false;
 let timerInterval;
 let pomodoroMinutes = 20;
+const colors = ['color1', 'color2', 'color3', 'color4', 'color5'];
 
+// ----- Elementos -----
 const container = document.getElementById("bubbleContainer");
 const plopSound = document.getElementById("plopSound");
 const modal = document.getElementById("modal");
+const timerDisplay = document.getElementById("timerDisplay");
 
-// Inicialización - Ocultar modal al cargar
-modal.style.display = "none";
-
+// ----- Guardar estado -----
 function saveBubbles() {
   localStorage.setItem("bubblyTasks", JSON.stringify(bubbles));
   localStorage.setItem("huboTareas", JSON.stringify(huboTareas));
 }
 
+// ----- Mostrar burbujas -----
 function renderBubbles() {
   container.innerHTML = "";
 
-  // Mostrar modal solo si hubo tareas y ahora no hay ninguna
   if (bubbles.length === 0 && huboTareas) {
     modal.style.display = "flex";
   } else {
@@ -29,149 +31,70 @@ function renderBubbles() {
 
   bubbles.forEach((task, index) => {
     const div = document.createElement("div");
-    div.className = "bubble";
+    div.className = `bubble ${colors[Math.floor(Math.random() * colors.length)]}`;
     div.textContent = task;
     div.draggable = true;
 
     const handleDelete = () => {
       if (confirm(`¿Eliminar "${task}"?`)) {
         bubbles.splice(index, 1);
-        huboTareas = bubbles.length > 0 || huboTareas; // Mantener estado si ya hubo tareas
+        huboTareas = bubbles.length > 0 || huboTareas;
         saveBubbles();
         renderBubbles();
         plopSound.play();
       }
     };
 
-    div.addEventListener("click", handleDelete);      // Para mouse
-    div.addEventListener("touchend", handleDelete);   // Para celular
+    div.addEventListener("click", handleDelete);
+    div.addEventListener("touchend", handleDelete);
 
     container.appendChild(div);
   });
 }
 
-
-document.getElementById("taskInput").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    addTask();
-  }
-});
-
-
+// ----- Añadir tarea -----
 function addTask() {
   const input = document.getElementById("taskInput");
   const value = input.value.trim();
 
-  if (value && bubbles.length < 20) {
+  if (!value || bubbles.length >= 20) return;
+
+  const indexExistente = bubbles.findIndex(t => t.toLowerCase() === value.toLowerCase());
+
+  if (indexExistente !== -1) {
+    if (confirm(`"${value}" ya existe. ¿Querés reemplazarla?`)) {
+      bubbles[indexExistente] = value;
+    } else {
+      return;
+    }
+  } else {
     bubbles.push(value);
-    huboTareas = true; // Marcar que hubo al menos una tarea
-    input.value = "";
-    saveBubbles();
-    renderBubbles();
-    document.getElementById("taskInputArea").style.display = "none";
   }
-}
 
-function closeModal() {
-  modal.style.display = "none";
-  // Si quieres que no vuelva a aparecer aunque no haya tareas
-  huboTareas = false;
+  huboTareas = true;
+  input.value = "";
   saveBubbles();
+  renderBubbles();
+  document.getElementById("taskInputArea").style.display = "none";
 }
 
+// ----- Input por Enter -----
+document.getElementById("taskInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") addTask();
+});
+
+// ----- Toggle input -----
 function toggleTaskInput() {
   const area = document.getElementById("taskInputArea");
   const input = document.getElementById("taskInput");
 
-  if (area.style.display === "none") {
-    area.style.display = "block";
-    input.focus(); // ✅ Enfocar automáticamente el input
-  } else {
-    area.style.display = "none";
-  }
+  area.style.display = area.style.display === "none" ? "block" : "none";
+  if (area.style.display === "block") input.focus();
 }
 
-
-// Gestos para cambiar tiempo
-let lastY = null;
-pomodoroClock.addEventListener("touchstart", (e) => {
-  lastY = e.touches[0].clientY;
-});
-
-pomodoroClock.addEventListener("touchmove", (e) => {
-  if (lastY === null) return;
-  const currentY = e.touches[0].clientY;
-  const diffY = lastY - currentY;
-
-  let steps = Math.floor(diffY / 10);
-  if (steps !== 0) {
-    adjustTime(steps);
-    lastY = currentY;
-  }
-});
-
-pomodoroClock.addEventListener("touchend", () => {
-  lastY = null;
-});
-
-// Mouse scroll
-pomodoroClock.addEventListener("wheel", (e) => {
-  e.preventDefault();
-  adjustTime(e.deltaY < 0 ? 1 : -1);
-});
-let mouseIsDown = false;
-let lastMouseY = null;
-
-const wheel = document.querySelector('.wheel');
-
-// Evitar scroll general cuando tocamos la rueda (móvil)
-wheel.addEventListener('touchstart', (e) => {
-  e.stopPropagation();
-  document.body.style.overflow = 'hidden'; // Bloquear scroll de la página
-});
-
-wheel.addEventListener('touchend', () => {
-  document.body.style.overflow = ''; // Restaurar scroll cuando se termina el gesto
-});
-
-
-// Eventos para mouse
-pomodoroClock.addEventListener('mousedown', (e) => {
-  mouseIsDown = true;
-  lastMouseY = e.clientY;
-  e.preventDefault(); // Previene selección de texto
-});
-
-pomodoroClock.addEventListener('mousemove', (e) => {
-  if (!mouseIsDown || lastMouseY === null) return;
-  const currentY = e.clientY;
-  const diffY = lastMouseY - currentY;
-
-  let steps = Math.floor(diffY / 5);
-  if (steps !== 0) {
-    adjustTime(steps);
-    lastMouseY = currentY;
-  }
-});
-
-pomodoroClock.addEventListener('mouseup', () => {
-  mouseIsDown = false;
-  lastMouseY = null;
-});
-
-pomodoroClock.addEventListener('mouseleave', () => {
-  mouseIsDown = false;
-  lastMouseY = null;
-});
-
-
-// Click para iniciar/parar
-pomodoroClock.addEventListener("click", () => {
-  toggleTimer();
-});
-
+// ----- Pomodoro -----
 function adjustTime(delta) {
-  if (timerRunning) return; // No permitir cambios durante la cuenta regresiva
+  if (timerRunning) return;
 
   pomodoroMinutes = Math.min(60, Math.max(5, pomodoroMinutes + delta));
   timer = pomodoroMinutes * 60;
@@ -191,6 +114,7 @@ function toggleTimer() {
     timerRunning = false;
   } else {
     if (timer === 0) timer = pomodoroMinutes * 60;
+
     timerInterval = setInterval(() => {
       if (timer > 0) {
         timer--;
@@ -203,75 +127,35 @@ function toggleTimer() {
         updateTimerDisplay();
       }
     }, 1000);
+
     timerRunning = true;
   }
 }
 
-// Inicializar
-modal.style.display = "none"; // Ocultar modal al inicio
-renderBubbles();
-timer = pomodoroMinutes * 60;
-updateTimerDisplay();
+// Flechas ↑↓
+document.getElementById("arrow-up").addEventListener("click", () => adjustTime(1));
+document.getElementById("arrow-down").addEventListener("click", () => adjustTime(-1));
+document.getElementById("pomodoroClock").addEventListener("click", toggleTimer);
 
-// Drag & drop tareas
-new Sortable(container, {
-  animation: 150,
-  onEnd: function (evt) {
-    const item = bubbles.splice(evt.oldIndex, 1)[0];
-    bubbles.splice(evt.newIndex, 0, item);
-    saveBubbles();
-    renderBubbles();
-  }
-});
-
-const colors = ['color1', 'color2', 'color3', 'color4', 'color5'];
-
-// Agregar tarea con color aleatorio
-function addTask() {
-  const input = document.getElementById("taskInput");
-  const text = input.value.trim();
-  if (!text) return;
-
-  const task = document.createElement("div");
-  task.classList.add("task");
-  task.classList.add(colors[Math.floor(Math.random() * colors.length)]);
-  task.textContent = text;
-
-  // Si querés que se puedan eliminar:
-  task.onclick = () => {
-    if (confirm("¿Eliminar tarea?")) task.remove();
-    checkAllTasksDone();
-  };
-
-  document.getElementById("bubbleContainer").appendChild(task);
-  input.value = "";
-  checkAllTasksDone();
-}
-
-// Alternar input
-function toggleTaskInput() {
-  const area = document.getElementById("taskInputArea");
-  area.style.display = area.style.display === "none" ? "block" : "none";
-}
-
-// Mostrar modal sugerencia
+// ----- Modal de tareas aleatorias -----
 document.getElementById("snowflake-help").addEventListener("click", () => {
   document.getElementById("helper-modal").classList.remove("hidden");
 });
 
-// Cerrar modal
 function closeHelperModal() {
   document.getElementById("helper-modal").classList.add("hidden");
 }
 
 function highlightTaskRoulette() {
-  const tasks = Array.from(document.querySelectorAll('.task'));
+  closeHelperModal();
+
+  const tasks = Array.from(document.querySelectorAll('.bubble'));
   if (tasks.length === 0) return;
 
   tasks.forEach(t => t.classList.remove('highlighted'));
 
   let index = 0;
-  let totalCycles = 20 + Math.floor(Math.random() * 10); // cuántas vueltas da
+  let totalCycles = 20 + Math.floor(Math.random() * 10);
   let delay = 80;
 
   function cycle() {
@@ -283,10 +167,26 @@ function highlightTaskRoulette() {
 
     if (totalCycles > 0) {
       setTimeout(cycle, delay);
-      delay += 20; // cada vez más lento
+      delay += 20;
     }
   }
 
   cycle();
 }
+
+// ----- Inicialización -----
+modal.style.display = "none";
+renderBubbles();
+timer = pomodoroMinutes * 60;
+updateTimerDisplay();
+
+new Sortable(container, {
+  animation: 150,
+  onEnd: function (evt) {
+    const item = bubbles.splice(evt.oldIndex, 1)[0];
+    bubbles.splice(evt.newIndex, 0, item);
+    saveBubbles();
+    renderBubbles();
+  }
+});
 
