@@ -59,17 +59,15 @@ function addTask() {
 
   if (!value || bubbles.length >= 20) return;
 
-  const indexExistente = bubbles.findIndex(t => t.toLowerCase() === value.toLowerCase());
+  bubbles.push(value);
 
-  if (indexExistente !== -1) {
-    if (confirm(`"${value}" ya existe. ¿Querés reemplazarla?`)) {
-      bubbles[indexExistente] = value;
-    } else {
-      return;
-    }
-  } else {
-    bubbles.push(value);
-  }
+  huboTareas = true;
+  input.value = "";
+  saveBubbles();
+  renderBubbles();
+  document.getElementById("taskInputArea").style.display = "none";
+}
+
 
   huboTareas = true;
   input.value = "";
