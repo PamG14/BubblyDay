@@ -11,7 +11,7 @@ const colors = ['color1', 'color2', 'color3', 'color4', 'color5'];
 const container = document.getElementById("bubbleContainer");
 const plopSound = document.getElementById("plopSound");
 const modal = document.getElementById("modal");
-const HelperModal = document.getElementById("helper-modal");
+const helperModal = document.getElementById("helper-modal");
 const timerDisplay = document.getElementById("timerDisplay");
 
 // ----- Guardar estado -----
