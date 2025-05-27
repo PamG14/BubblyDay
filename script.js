@@ -276,3 +276,23 @@ function selectRandomTask() {
   const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
   randomTask.classList.add('highlighted');
 }
+
+document.getElementById("snowflake-help").addEventListener("click", () => {
+  document.getElementById("helper-modal").classList.remove("hidden");
+});
+
+function closeModal() {
+  document.getElementById("helper-modal").classList.add("hidden");
+}
+
+function selectRandomTask() {
+  closeModal();
+
+  const tasks = document.querySelectorAll('.task');
+  if (tasks.length === 0) return;
+
+  tasks.forEach(task => task.classList.remove('highlighted'));
+
+  const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
+  randomTask.classList.add('highlighted');
+}
