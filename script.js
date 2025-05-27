@@ -190,3 +190,6 @@ new Sortable(container, {
   }
 });
 
+function closeModal() {
+  document.getElementById("modal").style.display = "none";
+}
