@@ -84,10 +84,6 @@ button:active {
     inset 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-  background-color: #e6c6e6;
-  transform: scale(1.05);
-}
 
 #bubbleContainer {
   display: flex;
@@ -284,5 +280,74 @@ button:hover {
 #timerDisplay {
   font-weight: bold;
   font-size: 1.6em;           /* ajustamos esto también */
+}
+
+
+/* Colores pastel para tareas */
+.color1 { background-color: #c4e4f6; }
+.color2 { background-color: #d5c4f0; }
+.color3 { background-color: #ffe0e9; }
+.color4 { background-color: #fef3c7; }
+.color5 { background-color: #d1f5d3; }
+
+.task {
+  padding: 12px 24px;
+  border-radius: 20px;
+  font-size: 18px;
+  margin: 10px;
+  color: #4b4b4b;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+/* Botón de copo de nieve */
+.snowflake-button {
+  background-color: #c4e4f6;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.1s;
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+}
+
+.snowflake-button:active {
+  transform: scale(0.95);
+}
+
+/* Modal de ayuda */
+.modal.hidden { display: none; }
+
+#helper-modal.modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#helper-modal .modal-content {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+/* Tarea destacada */
+.highlighted {
+  transform: scale(1.1);
+  background-color: #b8f2e6 !important;
+  border: 2px solid #4dd4c6;
+  z-index: 10;
 }
 
