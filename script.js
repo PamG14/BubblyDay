@@ -143,6 +143,7 @@ function highlightTaskRoulette() {
   const tasks = Array.from(document.querySelectorAll('.bubble'));
   if (tasks.length === 0) {
     alert("¡No hay tareas para elegir!");
+    closeHelperModal(); // 👉 cierra el modal si no hay tareas
     return;
   }
 
