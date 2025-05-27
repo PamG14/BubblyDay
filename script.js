@@ -59,7 +59,6 @@ function addTask() {
   if (!value || bubbles.length >= 20) return;
 
   bubbles.push(value);
-
   huboTareas = true;
   input.value = "";
   saveBubbles();
@@ -67,13 +66,6 @@ function addTask() {
   document.getElementById("taskInputArea").style.display = "none";
 }
 
-
-  huboTareas = true;
-  input.value = "";
-  saveBubbles();
-  renderBubbles();
-  document.getElementById("taskInputArea").style.display = "none";
-}
 
 // ----- Input por Enter -----
 document.getElementById("taskInput").addEventListener("keydown", (e) => {
@@ -190,3 +182,4 @@ new Sortable(container, {
 function closeModal() {
   document.getElementById("modal").style.display = "none";
 }
+
