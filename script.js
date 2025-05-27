@@ -126,14 +126,16 @@ document.getElementById("snowflake-help").addEventListener("click", function () 
   document.getElementById("helper-modal").classList.remove("hidden");
 });
 
-
-// Función mejorada para cerrar modales
-function closeHelperModal() {
-  document.getElementById("helper-modal").classList.add("hidden");
+// Función para cerrar el modal de finalización
+function closeModal() {
+  const modal = document.getElementById("modal");
+  if (modal) modal.classList.add("hidden");
 }
 
-function closeModal() {
-  document.getElementById("modal").classList.add("hidden");
+// Función para cerrar el modal de ayuda
+function closeHelperModal() {
+  const modal = document.getElementById("helper-modal");
+  if (modal) modal.classList.add("hidden");
 }
 
 // Función mejorada para highlightTaskRoulette
