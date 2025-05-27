@@ -223,3 +223,56 @@ new Sortable(container, {
     renderBubbles();
   }
 });
+
+const colors = ['color1', 'color2', 'color3', 'color4', 'color5'];
+
+// Agregar tarea con color aleatorio
+function addTask() {
+  const input = document.getElementById("taskInput");
+  const text = input.value.trim();
+  if (!text) return;
+
+  const task = document.createElement("div");
+  task.classList.add("task");
+  task.classList.add(colors[Math.floor(Math.random() * colors.length)]);
+  task.textContent = text;
+
+  // Si querés que se puedan eliminar:
+  task.onclick = () => {
+    if (confirm("¿Eliminar tarea?")) task.remove();
+    checkAllTasksDone();
+  };
+
+  document.getElementById("bubbleContainer").appendChild(task);
+  input.value = "";
+  checkAllTasksDone();
+}
+
+// Alternar input
+function toggleTaskInput() {
+  const area = document.getElementById("taskInputArea");
+  area.style.display = area.style.display === "none" ? "block" : "none";
+}
+
+// Mostrar modal sugerencia
+document.getElementById("snowflake-help").addEventListener("click", () => {
+  document.getElementById("helper-modal").classList.remove("hidden");
+});
+
+// Cerrar modal
+function closeHelperModal() {
+  document.getElementById("helper-modal").classList.add("hidden");
+}
+
+// Seleccionar tarea aleatoria
+function selectRandomTask() {
+  closeHelperModal();
+
+  const tasks = document.querySelectorAll('.task');
+  if (tasks.length === 0) return;
+
+  tasks.forEach(task => task.classList.remove('highlighted'));
+
+  const randomTask = tasks[Math.floor(Math.random() * tasks.length)];
+  randomTask.classList.add('highlighted');
+}
