@@ -22,11 +22,6 @@ function saveBubbles() {
 function renderBubbles() {
   container.innerHTML = "";
 
-  if (bubbles.length === 0 && huboTareas) {
-    modal.style.display = "flex";
-  } else {
-    modal.style.display = "none";
-  }
 
   bubbles.forEach((task, index) => {
     const div = document.createElement("div");
@@ -126,24 +121,28 @@ document.getElementById("arrow-up").addEventListener("click", () => adjustTime(1
 document.getElementById("arrow-down").addEventListener("click", () => adjustTime(-1));
 document.getElementById("pomodoroClock").addEventListener("click", toggleTimer);
 
-// ----- Modal de tareas aleatorias -----
-document.getElementById("snowflake-help").addEventListener("click", () => {
-  document.getElementById("helper-modal").classList.remove("hidden");
-});
+// Event listener para el copo de nieve
+  document.getElementById("snowflake-help").addEventListener("click", () => {
+    document.getElementById("helper-modal").classList.remove("hidden");
+  });
+})
 
+// Función mejorada para cerrar modales
 function closeHelperModal() {
   document.getElementById("helper-modal").classList.add("hidden");
 }
 
 function closeModal() {
-  document.getElementById("helper-modal").classList.add("hidden");
+  document.getElementById("modal").classList.add("hidden");
 }
 
+// Función mejorada para highlightTaskRoulette
 function highlightTaskRoulette() {
-  closeHelperModal();
-
   const tasks = Array.from(document.querySelectorAll('.bubble'));
-  if (tasks.length === 0) return;
+  if (tasks.length === 0) {
+    alert("¡No hay tareas para elegir!");
+    return;
+  }
 
   tasks.forEach(t => t.classList.remove('highlighted'));
 
@@ -161,11 +160,22 @@ function highlightTaskRoulette() {
     if (totalCycles > 0) {
       setTimeout(cycle, delay);
       delay += 20;
+    } else {
+      // Al finalizar, selecciona la tarea resaltada
+      const selectedTask = document.querySelector('.highlighted');
+      if (selectedTask) {
+        selectedTask.classList.add('selected-task');
+        setTimeout(() => {
+          selectedTask.classList.remove('selected-task');
+        }, 2000);
+      }
     }
   }
 
   cycle();
+  closeHelperModal(); // Cierra el modal después de iniciar la selección
 }
+
 
 // ----- Inicialización -----
 modal.style.display = "none";
