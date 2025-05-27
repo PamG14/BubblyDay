@@ -1,6 +1,6 @@
 // ----- Estado inicial -----
 let bubbles = JSON.parse(localStorage.getItem("bubblyTasks")) || [];
-let huboTareas = JSON.parse(localStorage.getItem("huboTareas")) || false;
+let huboTareas = false;
 let timer = 0;
 let timerRunning = false;
 let timerInterval;
@@ -16,7 +16,6 @@ const timerDisplay = document.getElementById("timerDisplay");
 // ----- Guardar estado -----
 function saveBubbles() {
   localStorage.setItem("bubblyTasks", JSON.stringify(bubbles));
-  localStorage.setItem("huboTareas", JSON.stringify(huboTareas));
 }
 
 // ----- Mostrar burbujas -----
