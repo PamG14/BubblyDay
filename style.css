@@ -343,9 +343,6 @@ button:active {
   box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   text-align: center;
 }
-#helper-modal.modal:not(.hidden) {
-  display: flex;
-}
 
 /* Tarea destacada */
 .highlighted {
