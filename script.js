@@ -122,10 +122,10 @@ document.getElementById("arrow-down").addEventListener("click", () => adjustTime
 document.getElementById("pomodoroClock").addEventListener("click", toggleTimer);
 
 // Event listener para el copo de nieve
-  document.getElementById("snowflake-help").addEventListener("click", () => {
-    document.getElementById("helper-modal").classList.remove("hidden");
-  });
-})
+document.getElementById("snowflake-help").addEventListener("click", function () {
+  document.getElementById("helper-modal").classList.remove("hidden");
+});
+
 
 // Función mejorada para cerrar modales
 function closeHelperModal() {
