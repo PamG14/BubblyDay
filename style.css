@@ -350,4 +350,7 @@ button:active {
   border: 2px solid #4dd4c6;
   z-index: 10;
 }
+.hidden {
+  display: none;
+}
 
