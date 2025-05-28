@@ -105,13 +105,26 @@ button:active {
     inset 0 3px 6px rgba(255, 255, 255, 0.7),
     inset 0 -2px 4px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  animation: float 4s ease-in-out infinite; /* Animación más lenta */
   position: relative; /* Para efectos avanzados */
 }
 
-@keyframes float {
+@keyframes floatUp {
   0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-8px) scale(1.02); } /* + Movimiento y escala */
+  50% { transform: translateY(-8px) scale(1.02); }
+}
+
+@keyframes floatDown {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(8px) scale(1.02); }
+}
+
+/* Asignamos la animación según la posición en el DOM */
+.bubble:nth-child(even) {
+  animation: floatUp 4s ease-in-out infinite;
+}
+
+.bubble:nth-child(odd) {
+  animation: floatDown 4s ease-in-out infinite;
 }
 
 .bubble:hover {
