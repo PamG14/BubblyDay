@@ -161,11 +161,12 @@ function highlightTaskRoulette() {
   const tasks = Array.from(document.querySelectorAll('.bubble'));
   if (tasks.length === 0) {
     alert("¡No hay tareas para elegir!");
-    closeHelperModal(); // 👉 cierra el modal si no hay tareas
+    closeHelperModal(); // Cierra el modal si no hay tareas
     return;
   }
 
-  tasks.forEach(t => t.classList.remove('highlighted'));
+  // Elimina clases previas de resaltado
+  tasks.forEach(t => t.classList.remove('highlighted', 'winner'));
 
   let index = 0;
   let totalCycles = 20 + Math.floor(Math.random() * 10);
@@ -182,19 +183,21 @@ function highlightTaskRoulette() {
       setTimeout(cycle, delay);
       delay += 20;
     } else {
-      // Al finalizar, selecciona la tarea resaltada
+      // Fin del sorteo: se marca la burbuja ganadora con la clase "winner"
       const selectedTask = document.querySelector('.highlighted');
       if (selectedTask) {
-        selectedTask.classList.add('selected-task');
+        selectedTask.classList.remove('highlighted'); // Quita el resaltado temporal
+        selectedTask.classList.add('winner');
+        // Opcional: luego de cierto tiempo puedes quitar la clase si lo deseas
         setTimeout(() => {
-          selectedTask.classList.remove('selected-task');
+          selectedTask.classList.remove('winner');
         }, 2000);
       }
     }
   }
 
   cycle();
-  closeHelperModal(); // Cierra el modal después de iniciar la selección
+  closeHelperModal(); // Cierra el modal de ayuda una vez iniciado el sorteo
 }
 
 
