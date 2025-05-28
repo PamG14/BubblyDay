@@ -23,15 +23,25 @@ function saveBubbles() {
 function renderBubbles() {
   container.innerHTML = "";
 
+  bubbles.forEach((item, index) => {
+    let bubbleObj;
+    // Para tareas antiguas que sean string, se convierten en objeto
+    if (typeof item === "string") {
+      bubbleObj = { text: item, color: colors[Math.floor(Math.random() * colors.length)] };
+      bubbles[index] = bubbleObj;
+      saveBubbles();
+    } else {
+      bubbleObj = item;
+    }
 
-  bubbles.forEach((task, index) => {
     const div = document.createElement("div");
-    div.className = `bubble ${colors[Math.floor(Math.random() * colors.length)]}`;
-    div.textContent = task;
+    // Usa el color almacenado en el objeto
+    div.className = `bubble ${bubbleObj.color}`;
+    div.textContent = bubbleObj.text;
     div.draggable = true;
 
     const handleDelete = () => {
-      if (confirm(`¿Eliminar "${task}"?`)) {
+      if (confirm(`¿Eliminar "${bubbleObj.text}"?`)) {
         bubbles.splice(index, 1);
         huboTareas = bubbles.length > 0 || huboTareas;
         saveBubbles();
@@ -46,6 +56,7 @@ function renderBubbles() {
     container.appendChild(div);
   });
 }
+
 
 // ----- Añadir tarea -----
 function addTask() {
