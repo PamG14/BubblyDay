@@ -196,6 +196,15 @@ button:active {
   transform: scale(0.9);
 }
 
+.bubble.winner {
+  transform: scale(1.2); /* La burbuja gana un poco de tamaño */
+  background-color: #fff0b3; /* Un color pastel nuevo, acorde con tu paleta */
+  border-color: #ffec99; /* Opcional: un borde que refuerce el efecto ganador */
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+
+
 /* Input area (se mantiene igual) */
 #taskInputArea {
   margin-top: 10px;
