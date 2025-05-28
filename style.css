@@ -348,5 +348,7 @@ button:active {
 .hidden {
   display: none;
 }
-/* Modal de ayuda */
-.modal.hidden { display: none; }
+#helper-modal.modal.hidden {
+  display: none;
+}
+
