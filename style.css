@@ -124,7 +124,7 @@ button:active {
 }
 
 .bubble:nth-child(odd) {
-  animation: floatDown 4s ease-in-out infinite;
+  animation: floatDown 4s ease-in-out;
 }
 
 .bubble:hover {
