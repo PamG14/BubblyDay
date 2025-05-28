@@ -203,4 +203,24 @@ document.querySelector(".close-btn").addEventListener("touchend", (e) => {
   closeModal();
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  renderBubbles();
+  timer = pomodoroMinutes * 60;
+  updateTimerDisplay();
+
+  new Sortable(container, {
+    animation: 150,
+    onEnd: function (evt) {
+      const item = bubbles.splice(evt.oldIndex, 1)[0];
+      bubbles.splice(evt.newIndex, 0, item);
+      saveBubbles();
+      renderBubbles();
+    }
+  });
+
+  document.querySelector(".close-btn").addEventListener("touchend", (e) => {
+    e.preventDefault();
+    closeModal();
+  });
+});
 
