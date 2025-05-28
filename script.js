@@ -189,9 +189,9 @@ function highlightTaskRoulette() {
         selectedTask.classList.remove('highlighted'); // Quita el resaltado temporal
         selectedTask.classList.add('winner');
         // Opcional: luego de cierto tiempo puedes quitar la clase si lo deseas
-        setTimeout(() => {
-          selectedTask.classList.remove('winner');
-        }, 2000);
+       // setTimeout(() => {
+       //   selectedTask.classList.remove('winner');
+      //   }, 2000);
       }
     }
   }
