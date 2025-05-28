@@ -224,9 +224,3 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function closeModalFromButton(button) {
-  const modal = button.closest(".modal");
-  if (modal) {
-    modal.classList.add("hidden");
-  }
-}
