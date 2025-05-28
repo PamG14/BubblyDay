@@ -124,7 +124,7 @@ document.getElementById("pomodoroClock").addEventListener("click", toggleTimer);
 
 // Event listener para el copo de nieve
 document.getElementById("snowflake-help").addEventListener("click", function () {
-  helperModal.classList.add("hidden");
+  helperModal.classList.remove("hidden");
 });
 
 // Función para cerrar el modal de finalización
