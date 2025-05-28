@@ -319,9 +319,6 @@ button:active {
   transform: scale(0.95);
 }
 
-/* Modal de ayuda */
-.modal.hidden { display: none; }
-
 #helper-modal.modal {
   position: fixed;
   top: 0; left: 0;
@@ -351,4 +348,5 @@ button:active {
 .hidden {
   display: none;
 }
-
+/* Modal de ayuda */
+.modal.hidden { display: none; }
