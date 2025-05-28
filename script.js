@@ -35,12 +35,18 @@ function renderBubbles() {
     }
 
     const div = document.createElement("div");
-    // Usa el color almacenado en el objeto
     div.className = `bubble ${bubbleObj.color}`;
     div.textContent = bubbleObj.text;
     div.draggable = true;
 
-    const handleDelete = () => {
+    const handleBubbleClick = () => {
+      // Si ya está en estado "winner", al tocarla se revierte su estado sin preguntar nada
+      if (div.classList.contains("winner")) {
+        div.classList.remove("winner");
+        return;
+      }
+      
+      // Si no está en estado "winner", se pregunta si se desea borrar
       if (confirm(`¿Eliminar "${bubbleObj.text}"?`)) {
         bubbles.splice(index, 1);
         huboTareas = bubbles.length > 0 || huboTareas;
@@ -50,8 +56,8 @@ function renderBubbles() {
       }
     };
 
-    div.addEventListener("click", handleDelete);
-    div.addEventListener("touchend", handleDelete);
+    div.addEventListener("click", handleBubbleClick);
+    div.addEventListener("touchend", handleBubbleClick);
 
     container.appendChild(div);
   });
