@@ -124,7 +124,7 @@ document.getElementById("pomodoroClock").addEventListener("click", toggleTimer);
 
 // Event listener para el copo de nieve
 document.getElementById("snowflake-help").addEventListener("click", function () {
-  document.getElementById("helper-modal").classList.remove("hidden");
+  helperModal.classList.remove("hidden");
 });
 
 // Función para cerrar el modal de finalización
@@ -135,8 +135,7 @@ function closeModal() {
 
 // Función para cerrar el modal de ayuda
 function closeHelperModal() {
-  const modal = document.getElementById("helper-modal");
-  if (modal) modal.classList.add("hidden");
+  helperModal.classList.add("hidden");
 }
 
 // Función mejorada para highlightTaskRoulette
