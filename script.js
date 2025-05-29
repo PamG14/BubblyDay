@@ -70,7 +70,7 @@ function addTask() {
 
   if (!value || bubbles.length >= 20) return;
 
-  bubbles.push(value);
+  bubbles.push({ text: value, color: colors[Math.floor(Math.random() * colors.length)] });
   huboTareas = true;
   input.value = "";
   saveBubbles();
