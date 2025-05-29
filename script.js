@@ -63,7 +63,6 @@ function renderBubbles() {
   });
 }
 
-
 // ----- Añadir tarea -----
 function addTask() {
   const input = document.getElementById("taskInput");
@@ -81,17 +80,15 @@ function addTask() {
 
 
 // ----- Input por Enter -----
+
 document.getElementById("taskInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter") addTask();
 });
-// Evento adicional para móviles
-document.getElementById("taskInput").addEventListener("input", () => {
-  if (document.activeElement !== document.getElementById("taskInput")) {
-    addTask();
-  }
+
+// Evento alternativo para móviles: ejecuta la función cuando el usuario termina de escribir y sale del input
+document.getElementById("taskInput").addEventListener("blur", () => {
+  addTask();
 });
-
-
 
 // ----- Toggle input -----
 function toggleTaskInput() {
