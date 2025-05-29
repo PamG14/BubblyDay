@@ -84,6 +84,14 @@ function addTask() {
 document.getElementById("taskInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter") addTask();
 });
+// Evento adicional para móviles
+document.getElementById("taskInput").addEventListener("input", () => {
+  if (document.activeElement !== document.getElementById("taskInput")) {
+    addTask();
+  }
+});
+
+
 
 // ----- Toggle input -----
 function toggleTaskInput() {
