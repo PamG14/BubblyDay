@@ -86,7 +86,7 @@ document.getElementById("taskInput").addEventListener("keydown", (e) => {
 });
 
 // Evento alternativo para móviles: ejecuta la función cuando el usuario termina de escribir y sale del input
-document.getElementById("taskInput").addEventListener("blur", () => {
+document.getElementById("taskInput").addEventListener("change", () => {
   addTask();
 });
 
