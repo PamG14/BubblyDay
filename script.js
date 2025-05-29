@@ -96,8 +96,13 @@ function toggleTaskInput() {
   const input = document.getElementById("taskInput");
 
   area.style.display = area.style.display === "none" ? "block" : "none";
-  if (area.style.display === "block") input.focus();
+  
+  if (area.style.display === "block") {
+    input.focus();
+    input.setAttribute("inputmode", "text"); // Esto ayuda en móviles a activar bien el teclado
+  }
 }
+
 
 // ----- Pomodoro -----
 function adjustTime(delta) {
