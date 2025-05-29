@@ -120,7 +120,7 @@ button:active {
 
 /* Asignamos la animación según la posición en el DOM */
 .bubble:nth-child(even) {
-  animation: floatUp 4s ease-in-out infinite;
+  animation: floatUp 4s ease-in-out;
 }
 
 .bubble:nth-child(odd) {
@@ -359,7 +359,7 @@ button:active {
 
 /* Tarea destacada */
 .highlighted {
-  transform: scale(1.1);
+  transform: scale(1.2);
   background-color: #b8f2e6 !important;
   border: 2px solid #4dd4c6;
   z-index: 10;
