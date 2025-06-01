@@ -98,9 +98,17 @@ document.getElementById("taskInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter") addTask();
 });
 
-document.getElementById("addBtn").addEventListener("click", addTask);
+let addBtnTouchUsed = false;
 document.getElementById("addBtn").addEventListener("touchend", function(e) {
+  addBtnTouchUsed = true;
   e.preventDefault();
+  addTask();
+});
+document.getElementById("addBtn").addEventListener("click", function(e) {
+  if (addBtnTouchUsed) {
+    addBtnTouchUsed = false;
+    return;
+  }
   addTask();
 });
 
