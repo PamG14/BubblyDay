@@ -41,6 +41,12 @@ function renderBubbles() {
         saveBubbles();
         renderBubbles();
         plopSound.play();
+
+        // 👇 Mostrar el modal si se eliminaron todas las burbujas
+        if (bubbles.length === 0 && huboTareas) {
+          showModal(); // Esta función debe existir
+          huboTareas = false; // Reinicia para evitar mostrarlo de nuevo
+        }
       }
     };
 
@@ -50,6 +56,7 @@ function renderBubbles() {
     container.appendChild(div);
   });
 }
+
 
 
 // ----- Añadir tarea -----
