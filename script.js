@@ -22,6 +22,8 @@ function saveBubbles() {
 // ----- Mostrar burbujas -----
 function renderBubbles() {
   container.innerHTML = "";
+  // Declarar la variable fuera del bucle para controlar el touch
+  let touchUsed = false;
 
   bubbles.forEach((bubbleObj, index) => {
     const div = document.createElement("div");
@@ -29,7 +31,7 @@ function renderBubbles() {
     div.textContent = bubbleObj.text;
     div.draggable = true;
 
-    const handleBubbleClick = () => {
+    function handleBubbleClick() {
       if (div.classList.contains("winner")) {
         div.classList.remove("winner");
         return;
@@ -42,16 +44,28 @@ function renderBubbles() {
         renderBubbles();
         plopSound.play();
 
-        // 👇 Mostrar el modal si se eliminaron todas las burbujas
         if (bubbles.length === 0 && huboTareas) {
-          showModal(); // Esta función debe existir
-          huboTareas = false; // Reinicia para evitar mostrarlo de nuevo
+          showModal();
+          huboTareas = false;
         }
       }
-    };
+    }
 
-    div.addEventListener("click", handleBubbleClick);
-    div.addEventListener("touchend", handleBubbleClick);
+    // TOUCHEND: solo ejecuta y previene doble click
+    div.addEventListener("touchend", function(e) {
+      touchUsed = true;
+      e.preventDefault();
+      handleBubbleClick();
+    });
+
+    // CLICK: solo ejecuta si no hubo touch
+    div.addEventListener("click", function(e) {
+      if (touchUsed) {
+        touchUsed = false;
+        return;
+      }
+      handleBubbleClick();
+    });
 
     container.appendChild(div);
   });
