@@ -201,19 +201,6 @@ function highlightTaskRoulette() {
 
 // ----- Inicialización -----
 modal.style.display = "none";
-renderBubbles();
-timer = pomodoroMinutes * 60;
-updateTimerDisplay();
-
-new Sortable(container, {
-  animation: 150,
-  onEnd: function (evt) {
-    const item = bubbles.splice(evt.oldIndex, 1)[0];
-    bubbles.splice(evt.newIndex, 0, item);
-    saveBubbles();
-    renderBubbles();
-  }
-});
 
 // Soporte para cerrar el modal también en celular
 document.querySelector(".close-btn").addEventListener("touchend", (e) => {
