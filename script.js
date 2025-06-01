@@ -73,7 +73,10 @@ document.getElementById("taskInput").addEventListener("keydown", (e) => {
 });
 
 document.getElementById("addBtn").addEventListener("click", addTask);
-
+document.getElementById("addBtn").addEventListener("touchend", function(e) {
+  e.preventDefault();
+  addTask();
+});
 
 // ----- Toggle input -----
 function toggleTaskInput() {
