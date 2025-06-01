@@ -50,7 +50,7 @@ bubbles.forEach((bubbleObj) => {
     div.addEventListener("click", handleBubbleClick);
     div.addEventListener("touchend", handleBubbleClick);
     container.appendChild(div);
-  )};
+  });
 
 // ----- Añadir tarea -----
 function addTask() {
