@@ -202,12 +202,6 @@ function highlightTaskRoulette() {
 // ----- Inicialización -----
 modal.style.display = "none";
 
-// Soporte para cerrar el modal también en celular
-document.querySelector(".close-btn").addEventListener("touchend", (e) => {
-  e.preventDefault(); // Evita que el toque genere doble evento
-  closeModal();
-});
-
 document.addEventListener("DOMContentLoaded", function () {
   renderBubbles();
   timer = pomodoroMinutes * 60;
