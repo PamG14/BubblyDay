@@ -57,6 +57,11 @@ function renderBubbles() {
   });
 }
 
+function showModal() {
+  const modal = document.getElementById("modal");
+  modal.classList.remove("hidden");
+  modal.style.display = "block"; // si estás usando display para mostrarlo
+}
 
 
 // ----- Añadir tarea -----
