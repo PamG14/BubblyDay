@@ -29,12 +29,6 @@ bubbles.forEach((bubbleObj) => {
   div.textContent = bubbleObj.text;
   div.draggable = true;
   container.appendChild(div);
-});
-
-    const div = document.createElement("div");
-    div.className = `bubble ${bubbleObj.color}`;
-    div.textContent = bubbleObj.text;
-    div.draggable = true;
 
     const handleBubbleClick = () => {
       // Si ya está en estado "winner", al tocarla se revierte su estado sin preguntar nada
@@ -55,7 +49,6 @@ bubbles.forEach((bubbleObj) => {
 
     div.addEventListener("click", handleBubbleClick);
     div.addEventListener("touchend", handleBubbleClick);
-
     container.appendChild(div);
   };
 
