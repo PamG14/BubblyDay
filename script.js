@@ -74,10 +74,6 @@ document.getElementById("taskInput").addEventListener("keydown", (e) => {
 
 document.getElementById("addBtn").addEventListener("click", addTask);
 
-// Evento alternativo para móviles: ejecuta la función cuando el usuario termina de escribir y sale del input
-document.getElementById("taskInput").addEventListener("change", () => {
-  addTask();
-});
 
 // ----- Toggle input -----
 function toggleTaskInput() {
