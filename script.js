@@ -23,16 +23,13 @@ function saveBubbles() {
 function renderBubbles() {
   container.innerHTML = "";
 
-  bubbles.forEach((item, index) => {
-    let bubbleObj;
-    // Para tareas antiguas que sean string, se convierten en objeto
-    if (typeof item === "string") {
-      bubbleObj = { text: item, color: colors[Math.floor(Math.random() * colors.length)] };
-      bubbles[index] = bubbleObj;
-      saveBubbles();
-    } else {
-      bubbleObj = item;
-    }
+bubbles.forEach((bubbleObj) => {
+  const div = document.createElement("div");
+  div.className = `bubble ${bubbleObj.color}`;
+  div.textContent = bubbleObj.text;
+  div.draggable = true;
+  container.appendChild(div);
+});
 
     const div = document.createElement("div");
     div.className = `bubble ${bubbleObj.color}`;
