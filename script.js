@@ -80,6 +80,7 @@ function addTask() {
 
 
 // ----- Input por Enter -----
+document.getElementById("addBtn").addEventListener("click", addTask);
 
 document.getElementById("taskInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter") addTask();
