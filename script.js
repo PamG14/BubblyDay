@@ -78,13 +78,12 @@ function addTask() {
   document.getElementById("taskInputArea").style.display = "none";
 }
 
-
 // ----- Input por Enter -----
-document.getElementById("addBtn").addEventListener("click", addTask);
-
 document.getElementById("taskInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter") addTask();
 });
+
+document.getElementById("addBtn").addEventListener("click", addTask);
 
 // Evento alternativo para móviles: ejecuta la función cuando el usuario termina de escribir y sale del input
 document.getElementById("taskInput").addEventListener("change", () => {
