@@ -1,5 +1,14 @@
 // ----- Estado inicial -----
 let bubbles = JSON.parse(localStorage.getItem("bubblyTasks")) || [];
+// Tras cargar bubbles...
+if (bubbles.length > 0 && typeof bubbles[0] === "string") {
+  // Migrar al nuevo formato
+  bubbles = bubbles.map(text => ({
+    text,
+    color: colors[Math.floor(Math.random() * colors.length)]
+  }));
+  saveBubbles();
+}
 let huboTareas = false;
 let timer = 0;
 let timerRunning = false;
