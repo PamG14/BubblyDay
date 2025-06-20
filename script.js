@@ -98,20 +98,22 @@ document.getElementById("taskInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter") addTask();
 });
 
-let addBtnTouchUsed = false;
-document.getElementById("addBtn").addEventListener("touchend", function(e) {
-  addBtnTouchUsed = true;
-  e.preventDefault();
-  addTask();
-});
+//let addBtnTouchUsed = false;
+//document.getElementById("addBtn").addEventListener("touchend", function(e) {
+  //addBtnTouchUsed = true;
+  //e.preventDefault();
+  //addTask();
+//});
+//document.getElementById("addBtn").addEventListener("click", function(e) {
+  //if (addBtnTouchUsed) {
+    //addBtnTouchUsed = false;
+   // return;
+  //}
+  //addTask();
+//});
 document.getElementById("addBtn").addEventListener("click", function(e) {
-  if (addBtnTouchUsed) {
-    addBtnTouchUsed = false;
-    return;
-  }
   addTask();
 });
-
 // ----- Toggle input -----
 function toggleTaskInput() {
   const area = document.getElementById("taskInputArea");
