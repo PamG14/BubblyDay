@@ -107,24 +107,18 @@ document.getElementById("taskInput").addEventListener("keydown", (e) => {
   if (e.key === "Enter") addTask();
 });
 
-let addBtnTouchUsed = false;
-document.getElementById("addBtn").addEventListener("touchend", function(e) {
-  addBtnTouchUsed = true;
-  e.preventDefault(); // Evita que después venga el click
+ let addBtnTouchUsed = false;
+ document.getElementById("addBtn").addEventListener("touchend", function(e) {
+   addBtnTouchUsed = true;
+   e.preventDefault();
+   addTask();
+   setTimeout(() => { addBtnTouchUsed = false; }, 300);
+ });
+ 
+ document.getElementById("addBtn").addEventListener("click", function(e) {
+   if (addBtnTouchUsed) return;
   addTask();
-});
-
-document.getElementById("addBtn").addEventListener("click", function(e) {
-  if (addBtnTouchUsed) {
-    addBtnTouchUsed = false;
-    return; // El touchend ya lo ejecutó
-  }
-  addTask();
-});
-//});
-document.getElementById("addBtn").addEventListener("click", function(e) {
-  addTask();
-});
+ });
 // ----- Toggle input -----
 function toggleTaskInput() {
   const area = document.getElementById("taskInputArea");
