@@ -81,11 +81,20 @@ function renderBubbles() {
     container.appendChild(div);
   });
 }
-
 function showModal() {
   modal.classList.remove("hidden");
   modal.style.display = "block";
+
+  const closeBtn = modal.querySelector(".close-btn");
+  if (closeBtn) {
+    addSmartListener(closeBtn, closeModal);
+  }
 }
+
+//function showModal() {
+//modal.classList.remove("hidden");
+//  modal.style.display = "block";
+//}
 
 // ----- Añadir tarea -----
 function addTask() {
@@ -239,5 +248,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  addSmartListener(document.querySelector(".close-btn"), closeModal);
-});
+//  addSmartListener(document.querySelector(".close-btn"), closeModal);
+//});
