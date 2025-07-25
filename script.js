@@ -82,10 +82,13 @@ function renderBubbles() {
   });
 }
 
-
 function showModal() {
 modal.classList.remove("hidden");
   modal.style.display = "block";
+  
+    setTimeout(() => {
+    closeModal();
+  }, 3000); // 3000 milisegundos = 3 segundos
 }
 
 // ----- Añadir tarea -----
