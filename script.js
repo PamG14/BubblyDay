@@ -240,5 +240,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-//  addSmartListener(document.querySelector(".close-btn"), closeModal);
-//});
+  addSmartListener(document.querySelector(".close-btn"), closeModal);
+});
