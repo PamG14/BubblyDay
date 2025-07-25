@@ -51,6 +51,10 @@ function addSmartListener(element, handler) {
 function renderBubbles() {
   container.innerHTML = "";
 
+  appState.bubbles = appState.bubbles.filter(
+  b => b && typeof b === "object" && "text" in b && "color" in b
+);
+
   appState.bubbles.forEach((bubbleObj, index) => {
     const div = document.createElement("div");
     div.className = `bubble ${bubbleObj.color}`;
