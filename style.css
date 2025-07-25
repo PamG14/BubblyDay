@@ -350,11 +350,17 @@ button:active {
 }
 
 #helper-modal .modal-content {
-  background-color: white;
-  padding: 20px 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+
+  background-color: #f3e8ff;
+  padding: 30px;
+  border-radius: 20px;
   text-align: center;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  position: relative;
+  width: 80%;
+  max-width: 400px;
+  font-size: 1.1em;
+  color: #4b3c78;
 }
 
 /* Tarea destacada */
