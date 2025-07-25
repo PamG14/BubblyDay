@@ -185,6 +185,7 @@ document.getElementById("snowflake-help").addEventListener("click", () => {
 // ----- Cerrar modales -----
 function closeModal() {
   modal.classList.add("hidden");
+  modal.style.display = "none";
 }
 
 function closeHelperModal() {
