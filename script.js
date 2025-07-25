@@ -92,7 +92,7 @@ modal.classList.remove("hidden");
   
     setTimeout(() => {
     closeModal();
-  }, 3000); // 3000 milisegundos = 3 segundos
+  }, 2500); // 2500 milisegundos = 2.5 segundos
 }
 
 // ----- Añadir tarea -----
