@@ -370,4 +370,8 @@ button:active {
 #helper-modal.modal.hidden {
   display: none;
 }
+#modal.modal.hidden {
+  display: none;
+}
+
 
